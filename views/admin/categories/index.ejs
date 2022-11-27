@@ -1,0 +1,37 @@
+<%- include ('../../partials/header')%>
+<%- include ('../../partials/navbar')%>
+<div class="container">
+    <hr>
+    <h2>Categorias</h2>
+    <a href="/admin/categories/new" class="btn btn-primary">Criar nova caterogia</a>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Slug</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbudy>
+            <% categories.forEach(category => {%>
+                <tr>
+                    <th><%= category.id%></th>
+                    <th><%= category.title%></th>
+                    <th><%= category.slug%></th>
+                    <th>
+                        <button class="btn btn-warning">Editar</button>
+                        <form method="post" action="/admin/categories/delete" style="display: inline"
+                              onsubmit="deleteConfirm(event, this)">
+                            <input type="hidden" name="id" value="<%= category.id%>">
+                            <button class="btn btn-danger" >Deletar</button>
+                        </form>
+                    </th>
+                </tr>
+            <%})%>
+        </tbudy>
+    </table>
+</div>
+
+<%- include ('../../partials/footer')%>
