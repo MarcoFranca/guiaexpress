@@ -1,0 +1,66 @@
+<%- include ('../../partials/header') %>
+<%- include ('../../partials/navbar')%>
+<div class="container">
+    <br>
+    <form method="post" action="/articles/update">
+        <div class="card">
+            <div class="card-header">
+                <h2>Editar artigo</h2>
+            </div>
+            <div class="card-body">
+
+                <input class="form-control" type="text" name="title" placeholder="Defina o titulo do artigo" value="<%= article.title%>"><br>
+                <input type="hidden" name="id" value="<%= article.id%>">
+                <textarea name="body" id="article" class="form-control" placeholder="Escreva o artigo aqui!"></textarea><br>
+                <label>Categoria</label>
+                <select name="category" id="" class="form-control">
+                    <% categories.forEach((category)=>{%>
+                    <%if (category.id == article.categoryId){%>
+                        <option value="<%= category.id%>" selected><%= category.title%></option>
+                    <%}else {%>
+                        <option value="<%= category.id%>" ><%= category.title%></option>
+                    <%}%>
+
+                    <%})%>
+
+                </select><br>
+                <button class="btn btn-primary">Atualizar</button>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+<div id="content" style="display: none">
+    <%- article.body%>
+</div>
+
+
+<%- include ('../../partials/footer')%>
+<script>
+    tinymce.init({
+        selector:"#article",
+        language:"pt_BR",
+        branding: false,
+        plugins:[
+            'advlist',
+            'autolink',
+            'link',
+            'image',
+            'lists',
+            'preview',
+            'searchreplace',
+            'wordcount',
+            'fullscreen',
+            'insertdatetime',
+            'media',
+            'save',
+            'table',
+            'emoticons',
+        ],
+        init_instance_callback: ()=>{
+            tinymce.get('article').setContent($("#content").html())
+        }
+    })
+
+</script>
