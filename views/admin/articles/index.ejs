@@ -1,0 +1,40 @@
+<%- include ('../../partials/header')%>
+<%- include ('../../partials/navbar')%>
+<div class="container">
+    <hr>
+    <h2>Artigos</h2>
+    <a href="/admin/articles/new" class="btn btn-primary">Criar novo artigo</a>
+    <hr>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Slug</th>
+            <th>Categoria</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbudy>
+            <% articles.forEach(article => {%>
+                <tr>
+                    <th><%= article.id%></th>
+                    <th><%= article.title%></th>
+                    <th><%= article.slug%></th>
+                    <th><%= article.category.title%></th>
+                    <th>
+                        <a href="/admin/articles/edit/<%= article.id%>" class="btn btn-warning">Editar</a>
+
+                        <form method="post" action="/admin/article/delete" style="display: inline"
+                              onsubmit="deleteConfirm(event, this)">
+                            <input type="hidden" name="id" value="<%= article.id%>">
+                            <button class="btn btn-danger" >Deletar</button>
+                        </form>
+                    </th>
+                </tr>
+            <%})%>
+        </tbudy>
+    </table>
+</div>
+
+<%- include ('../../partials/footer')%>

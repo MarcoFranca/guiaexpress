@@ -1,0 +1,36 @@
+<%-include ("../../partials/header.ejs") %>
+<%- include ("../../partials/homenavbar")%>
+
+<body>
+<div class="container">
+    <hr>
+    <% pagination.articles.rows.forEach(article =>{%>
+        <div class="card">
+            <div class="card-header">
+                <h2><%= article.title%></h2>
+
+            </div>
+            <div class="card-body">
+                <a href="/<%= article.slug%>" class="btn btn-primary">Ler Artigo</a>
+            </div>
+        </div><br>
+    <%})%>
+    <% if(pagination.page > 2) {%>
+    <a href="/articles/page/<%= pagination.page - 1%>"><<< anterior</a>
+        <% }else {%>
+        <a href="/"><<< anterior</a>
+    <%}%>
+    <%for (let i = 0; i < pagination.maxPages ; i++) {%>
+    <%const page = i+1 %>
+        <a href="/articles/page/<%= page%>"><%= i+1%></a>
+
+    <%}%>
+    <%if(pagination.page < pagination.maxPages){%>
+        <a href="/articles/page/<%= pagination.page + 1%>">Próximo >>></a>
+    <%}%>
+
+</div>
+</body>
+
+<%- include ('../../partials/footer.ejs');%>
+
