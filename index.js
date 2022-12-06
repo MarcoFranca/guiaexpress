@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const session = require('express-session');
+const PORT = process.env.PORT || 8080;
+
 //bd
 const connection = require('./database/database');
 const Category = require('./categories/Category');
@@ -87,6 +89,6 @@ app.get('/category/:slug',(req, res)=>{
 
 
 
-app.listen(8000,()=>{
-    console.log("o servidor está rodando na porta: 8000");
+app.listen(PORT,()=>{
+    console.log("o servidor está rodando na porta: ", PORT);
 })
